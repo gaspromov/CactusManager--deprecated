@@ -1,0 +1,19 @@
+{
+  "name": "cactusmanage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaspromov/CactusManage.git"
+  },
+  "author": "Maxim khotsevich <xozewitc@yandex.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaspromov/CactusManage/issues"
+  },
+  "homepage": "https://github.com/gaspromov/CactusManage#readme"
+}
