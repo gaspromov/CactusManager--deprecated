@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+html,body, app-root{
+    min-height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    display: grid;
+}
+app-sign-in,app-sign-up{display: grid;}
+router-outlet{position: absolute;}
+*{font-family: 'Saira', sans-serif; color: #3D3D3D; outline: none;}
+.content{height: 100%;}
+a{text-decoration: none;}
+a:focus{outline: auto;}
+button, select, a{cursor: pointer; box-sizing: border-box;}
+button, input{background: none; border: none; padding: 0px; box-sizing: border-box;}
+div{box-sizing: border-box;}
+h1, h2, h3, h4{margin: 0px; padding: 0px;}
+span.hr{width: 100%; box-sizing: border-box; border: 0.5px solid black; height: 1px; margin: 0px; background-color: black;}
+
+
+.pointer{cursor: pointer;}
+.border-box{box-sizing: border-box;}
+
+.login-padding{padding: 30px 150px; }
+.align-items-center{display: grid; align-items: center;}
+
+.background-cover{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.standart-btn{
+    display: grid;
+    align-items: center;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 15px;
+    width: 100%;
+    height: 50px;
+}
+.linear-btn{background: linear-gradient(91.44deg, #9DC2F3 0%, #91DCF4 100%);}
+.border-btn{border: 1px solid #92DCF5; color: #3D3D3D;}
+.blue-btn{background-color: #78B0F8; color: white; border: none;}
+
+.standart-input{
+    border: 1px solid #878787;
+    padding-left: 15px;
+    border-radius: 15px;
+    width: 100%;
+    height: 50px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+h1{font-size: 48px; font-weight: 600; line-height: 76px;}
+span.h1-underline{display: grid; text-align: center;}
+span.h1-underline span.hr{height: 2px;}
+.cactus-name{font-family: 'Montserrat', sans-serif;}
+h2.page-name{font-size: 36px; font-weight: 600; line-height: 37px;}
+
+
+.content-in{
+    height: 100%;
+    padding: 7% 5%;
+    background-color: #F4F4F4;
+    position: relative;
+}
+.content-in>div:last-child{
+    border-radius: 20px;
+    padding: 20px 0px;
+    background-color: white;
+    height: 100%;
+}
