@@ -1,5 +1,5 @@
 {
-  "name": "cactusmanage",
+  "name": "cactusmanager",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -46,5 +46,11 @@
     "lint-staged": "^10.5.0",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "mongoose": "^5.10.11"
   }
 }
