@@ -23,6 +23,7 @@ table{
 }
 table thead tr{border-bottom: 1px solid #898988;}
 table thead td{font-size: 18px; font-weight: 500;}
+td:last-child{width: 46px;}
 
 app-new-key{
     position: absolute;
@@ -30,4 +31,11 @@ app-new-key{
     width: 100%;
     height: 100%;
     border-radius: inherit;
+}
+
+td.action{
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 15px;
+    place-items: center;
 }
