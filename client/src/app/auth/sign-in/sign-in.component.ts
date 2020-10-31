@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { SeoService } from 'src/app/shared/services/seo/seo.service';
+
+@Component({
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.css']
+})
+export class SignInComponent implements OnInit {
+  loginForm: FormGroup;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private seo: SeoService
+  ) {
+    let data: any = this.activatedRoute.data.pipe();
+    data = data._value;
+    this.seo.changeTitle(data.title);
+  }
+
+  ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      email: new FormControl({ value: '', disabled: false }, [Validators.required, Validators.email]),
+      password: new FormControl({ value: '', disabled: false }, [Validators.required])
+    })
+  }
+
+  login(){
+    if (this.loginForm.valid)
+      console.log('');
+  }
+}

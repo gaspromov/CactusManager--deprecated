@@ -1,0 +1,29 @@
+<div class="auth login login-padding align-items-center content">
+
+    <div class="align-items-center">
+
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <span class="h1-underline">
+                    <h1 class="underline">Hello! Login here</h1>
+                    <span class="hr"></span>
+                </span>
+    
+                <input type="text" name="email" id="email" class="standart-input" placeholder="E-mail" formControlName="email">
+                <div class="password-inp">
+                    <input type="password" name="password" id="password" placeholder="Password" class="standart-input" formControlName="password">
+                    <a routerLink="/">Forgot password?</a>
+                </div>
+    
+                <button class="standart-btn linear-btn">Login</button>
+            </form>
+    
+            <span class="or"><span class="hr"></span>or<span class="hr"></span></span>
+    
+            <button routerLink="/sign-up" class="standart-btn border-btn">Sign Up</button>
+
+    </div>
+
+    <div class="background-cover">
+
+    </div>
+</div>

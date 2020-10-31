@@ -1,0 +1,33 @@
+.content-in>div:last-child{
+    grid-template-rows: auto auto 1fr;
+    padding: 20px 0px;
+}
+
+.header{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    justify-items: end;
+    column-gap: 50px;
+    padding: 0px 60px;
+}
+
+.checkboxes{display: grid; grid-template-columns: auto auto; column-gap: 25px;}
+
+.keys{
+    padding: 0px 60px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+table thead tr{border-bottom: 1px solid #898988;}
+table thead td{font-size: 18px; font-weight: 500;}
+
+app-new-key{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}

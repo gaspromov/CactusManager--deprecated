@@ -1,0 +1,34 @@
+<div class="new-key">
+    <span class="head">
+        <h3>New key</h3>
+        <img src="/assets/img/icons/plus.svg" alt="close" (click)="close()">
+    </span>
+    
+    <div class="data">
+
+        <div class="type">
+            <h4>Type:</h4>
+            <div class="checkbox-1-2">
+                <input type="radio" name="type" id="newRenewal">
+                <label for="newRenewal">Renewal</label>
+            </div>
+            <div class="checkbox-1-2">
+                <input type="radio" name="type" id="newLifetime" checked>
+                <label for="newLifetime">Lifetime</label>
+            </div>
+        </div>
+
+        <button class="standart-btn border-btn" (click)="newKey()">Generate</button>
+
+    </div>
+
+    <div class="key">
+        <h4>Key:</h4>
+        <span class="key" id="key">{{key}}</span>
+        <button class="standart-btn border-btn" (click)="copy('key')">
+            <img src="/assets/img/icons/copy.svg" alt="copy">
+        </button>
+    </div>
+
+</div>
+<div class="artboard blur dark" (click)="close()"></div>
