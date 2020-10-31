@@ -66,8 +66,8 @@
           },
           "configurations": {
             "production": {
-            "proxyConfig": "proxy.conf.json",
-            "browserTarget": "CactusManage:build:production"
+              "proxyConfig": "proxy.conf.json",
+              "browserTarget": "CactusManage:build:production"
             }
           }
         },
