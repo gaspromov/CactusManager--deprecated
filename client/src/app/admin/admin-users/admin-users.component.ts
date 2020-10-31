@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SeoService } from 'src/app/shared/services/seo/seo.service'
+import { SeoService } from 'src/app/shared/services/seo/seo.service';
 
 @Component({
-  selector: 'app-keys',
-  templateUrl: './keys.component.html',
-  styleUrls: ['./keys.component.css']
+  selector: 'app-admin-users',
+  templateUrl: './admin-users.component.html',
+  styleUrls: ['./admin-users.component.css']
 })
-export class KeysComponent implements OnInit {
+export class AdminUsersComponent implements OnInit {
   newKey: boolean = false;
 
   constructor(

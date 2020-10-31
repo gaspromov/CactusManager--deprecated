@@ -18,6 +18,12 @@ import { OwnerSideBarComponent } from './owner/owner-side-bar/owner-side-bar.com
 import { OwnerComponent } from './owner/owner/owner.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { OwnerApiComponent } from './owner/owner-api/owner-api.component';
+import { SearchPipe } from './shared/pipes/search/search.pipe';
+import { NewKeyComponent } from './owner/new-key/new-key.component';
+import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { NewRegistrKeyComponent } from './admin/new-registr-key/new-registr-key.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { OwnerApiComponent } from './owner/owner-api/owner-api.component';
     OwnerSideBarComponent,
     OwnerComponent,
     PageHeaderComponent,
-    OwnerApiComponent
+    OwnerApiComponent,
+    SearchPipe,
+    NewKeyComponent,
+    AdminSideBarComponent,
+    AdminComponent,
+    AdminUsersComponent,
+    NewRegistrKeyComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { SeoService } from 'src/app/shared/services/seo/seo.service';
 
 @Component({
   selector: 'app-owner-api',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwnerApiComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private seo: SeoService,
+  ) { 
+    let data: any = this.activatedRoute.data.pipe();
+    data = data._value;
+    this.seo.changeTitle(data.title);
+  }
 
   ngOnInit(): void {
   }

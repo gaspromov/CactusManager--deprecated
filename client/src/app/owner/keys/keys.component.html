@@ -2,5 +2,66 @@
     <app-page-header pageName="Keys"></app-page-header>
     <div>
         
+
+        <div class="header">
+            <button class="adding-btn" (click)="onChangeNewKey(true)">
+                <span class="plus">
+                    <img src="/assets/img/icons/plus.svg">
+                </span>
+                Add new key
+            </button>
+
+            <div class="checkboxes">
+                <div class="checkbox-1-2">
+                    <input type="checkbox" name="type" id="renewal">
+                    <label for="renewal" class="pointer">Renewal</label>
+                </div>
+                <div class="checkbox-1-2">
+                    <input type="checkbox" name="type" id="lifetime">
+                    <label for="lifetime" class="pointer">Lifetime</label>
+                </div>
+            </div>
+
+            <div class="search">
+                <input type="text" placeholder="Search" name="search" id="search" class="search-input" autocomplete="off">
+                <img src="/assets/img/icons/search.svg">
+            </div>
+        </div>
+
+        <span class="hr gray"></span>
+
+
+        <div class="keys">
+
+            <table>
+                <thead>
+                    <tr>
+                        <td>Nickname</td>
+                        <td>Key</td>
+                        <td>Type</td>
+                        <td>Purshase</td>
+                        <td>Renewal</td>
+                        <td>Used</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nickname#0909</td>
+                        <td>Cact-us05-Web0-gas5</td>
+                        <td>renewal</td>
+                        <td>20.10.2020</td>
+                        <td>20.11.2020</td>
+                        <td>3/200</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        </div>
+        <app-new-key *ngIf="newKey" (onClose)="onChangeNewKey($event)"></app-new-key>
+
+
     </div>
 </div>
