@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon index.js --prefix src",
+    "server": "nodemon index.js --prefix src",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "c:i": "npm install --prefix client",
+    "c:b": "npm build --prefix client",
     "lint": "eslint --debug src/",
     "lint:write": "eslint --fix --debug src/ ",
     "prettier": "prettier --write src/**/*.js"
@@ -32,6 +36,7 @@
   },
   "homepage": "https://github.com/gaspromov/CactusManage#readme",
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-node": "^4.1.0",
