@@ -31,10 +31,7 @@ const schema = new Schema(
       type: Number,
       required: true
     },
-    devices: {
-      type: Array,
-      default: undefined
-    }
+    devices: [String]
   },
   { versionKey: false }
 )
