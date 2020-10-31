@@ -18,7 +18,7 @@ button, input{background: none; border: none; padding: 0px; box-sizing: border-b
 div{box-sizing: border-box;}
 h1, h2, h3, h4{margin: 0px; padding: 0px;}
 span.hr{width: 100%; box-sizing: border-box; border: 0.5px solid #3d3d3d; height: 1px; margin: 0px; background-color: #3d3d3d;}
-span.hr.gray{background-color: #898989; border-color: #898989;}
+span.hr.grey{background-color: #898989; border-color: #898989;}
 
 .artboard{
     width: 100%;
