@@ -3,10 +3,15 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class GeneratorService {
+export class AIOService {
 
   constructor() { }
 
+  validDate(date: Date){
+    return date.getDate() + '.' + (date.getMonth() < 9 ? `0${date.getMonth()+1}` : date.getMonth() + 1) + '.' + date.getFullYear();
+  }
+
+  
   generateKey() {
     let library = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPWRSTUVWXYZ0123456789"
     let newPassword = "";
@@ -21,5 +26,4 @@ export class GeneratorService {
     }
     return newPassword;
   }
-
 }

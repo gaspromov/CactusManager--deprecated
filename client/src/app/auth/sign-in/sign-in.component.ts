@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 })
 export class SignInComponent implements OnInit {
   loginForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,12 +32,14 @@ export class SignInComponent implements OnInit {
   }
 
   async login(){
-    if (this.loginForm.valid)
       await this.auth.ownerLogin(this.loginForm.value)
         .then( (w: any) => {
           this.auth.setOwnerToken(w.accessToken);
           this.router.navigate(['/owner']);
         })
-        .catch(e => {console.log(e)})
+        .catch(e => {
+          console.log(e)
+          this.errorMessage = e.error.message;
+        })
   }
 }

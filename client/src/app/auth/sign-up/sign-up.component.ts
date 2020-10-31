@@ -11,6 +11,7 @@ import { SeoService } from 'src/app/shared/services/seo/seo.service';
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,21 +26,24 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      name: new FormControl({ value: '', disabled: false }, [Validators.required]),
-      email: new FormControl({ value: '', disabled: false }, [Validators.required, Validators.email]),
-      password: new FormControl({ value: '', disabled: false }, [Validators.required]),
-      key: new FormControl({ value: '', disabled: false }, [Validators.required])
+      name: new FormControl({ value: '', disabled: false }, [ Validators.required ]),
+      email: new FormControl({ value: '', disabled: false }, [ Validators.required, Validators.email ]),
+      password: new FormControl({ value: '', disabled: false }, [ Validators.required, Validators.minLength(6) ]),
+      key: new FormControl({ value: '', disabled: false }, [ Validators.required ])
     })
   }
 
   async signUp(){
-    if (this.signUpForm.valid)
-      await this.auth.ownerSignUp(this.signUpForm.value)
-        .then( (w: any) => {
-          this.auth.setOwnerToken(w.accessToken);
-          this.router.navigate(['/owner']);
-        })
-        .catch(e => {console.log(e);})
+    this.errorMessage = '';
+    await this.auth.ownerSignUp(this.signUpForm.value)
+      .then( (w: any) => {
+        this.auth.setOwnerToken(w.accessToken);
+        this.router.navigate(['/owner']);
+      })
+      .catch(e => {
+        console.log(e)
+        this.errorMessage = e.error.message;
+      })
   }
 
 }

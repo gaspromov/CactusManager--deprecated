@@ -1,4 +1,4 @@
-div.new-key{
+form.new-key{
     display: grid;
     row-gap: 15px;
 
@@ -43,10 +43,17 @@ h4{
     display: grid;
     row-gap: 10px;
 }
-.type{
+.data>.type{
     display: grid;
     grid-template-columns: auto auto 1fr;
     column-gap: 15px;
+    align-items: center;
+    justify-items: start;
+}
+.data>div{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
     align-items: center;
     justify-items: start;
 }
@@ -78,4 +85,8 @@ span.key{
     border-radius: 10px;
     padding: 0;
     place-items: center;
+}
+
+input[type="text"], input[type="date"]{
+    border-bottom: 1px solid #3d3d3d;
 }
