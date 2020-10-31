@@ -5,13 +5,16 @@ const { PORT, MONGODB_URI } = require('./config/keys')
 
 const mongodbOptions = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 }
 
 async function start() {
   try {
-    await mongoose.connect(MONGODB_URI, mongodbOptions)
-    app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`))
+    await mongoose
+      .connect(MONGODB_URI, mongodbOptions)
+      .then(console.log('Connected to Mongo DB'))
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
   } catch (e) {
     console.log('Ошибка при запуске сервера')
   }
