@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-admin-auth',
@@ -9,7 +11,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AdminAuthComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.loginForm= new FormGroup({
@@ -18,9 +23,14 @@ export class AdminAuthComponent implements OnInit {
     })
   }
 
-  login(){
+  async login(){
     if (this.loginForm.valid)
-      console.log(this.loginForm);
+      await this.auth.adminLogin(this.loginForm.value)
+        .then( (w: any) =>{
+          this.auth.setAdminToken(w.accessToken);
+          this.router.navigate(['/admin']);
+        })
+        .catch(e => {console.log(e)})
   }
 
 }

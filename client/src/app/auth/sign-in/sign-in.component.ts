@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SeoService } from 'src/app/shared/services/seo/seo.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +14,9 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private seo: SeoService
+    private seo: SeoService,
+    private auth: AuthService,
+    private router: Router,
   ) {
     let data: any = this.activatedRoute.data.pipe();
     data = data._value;
@@ -27,8 +30,13 @@ export class SignInComponent implements OnInit {
     })
   }
 
-  login(){
+  async login(){
     if (this.loginForm.valid)
-      console.log('');
+      await this.auth.ownerLogin(this.loginForm.value)
+        .then( (w: any) => {
+          this.auth.setOwnerToken(w.accessToken);
+          this.router.navigate(['/owner']);
+        })
+        .catch(e => {console.log(e)})
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { SeoService } from 'src/app/shared/services/seo/seo.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private seo: SeoService
+    private seo: SeoService,
+    private auth: AuthService,
+    private router: Router,
   ) {
     let data: any = this.activatedRoute.data.pipe();
     data = data._value;
@@ -29,9 +32,14 @@ export class SignUpComponent implements OnInit {
     })
   }
 
-  signUp(){
+  async signUp(){
     if (this.signUpForm.valid)
-      console.log(this.signUpForm)
+      await this.auth.ownerSignUp(this.signUpForm.value)
+        .then( (w: any) => {
+          this.auth.setOwnerToken(w.accessToken);
+          this.router.navigate(['/owner']);
+        })
+        .catch(e => {console.log(e);})
   }
 
 }

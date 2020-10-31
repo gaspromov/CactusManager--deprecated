@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AdminService } from 'src/app/shared/services/admin/admin.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { GeneratorService } from 'src/app/shared/services/generator/generator.service';
 
 @Component({
@@ -13,6 +15,8 @@ export class NewRegistrKeyComponent implements OnInit {
 
   constructor(
     private generator: GeneratorService,
+    private http: AdminService,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +42,15 @@ export class NewRegistrKeyComponent implements OnInit {
 
   newKey(){
     let key = this.generator.generateKey();
-    this.key = key;
+    this.http.newRegKey(key)
+      .then(w => {
+        this.key = key;
+      })
+      .catch(e => {
+        if ( e.status == 401)
+          this.auth.adminLogout();
+        else console.log(e);
+      })
   }
 
 }
