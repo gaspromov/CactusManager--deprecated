@@ -50,3 +50,7 @@ form > *:nth-child(2){margin-bottom: 5px;}
     color: #316CC3;
     font-size: 12px;
 }
+
+.border-btn:hover{
+    background: linear-gradient(91.44deg, #9DC2F3 0%, #91DCF4 100%);
+}
