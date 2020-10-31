@@ -6,7 +6,8 @@ const { PORT, MONGODB_URI } = require('./config/keys')
 const mongodbOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: false
 }
 
 async function start() {
