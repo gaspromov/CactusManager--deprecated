@@ -28,7 +28,7 @@ module.exports.signUpValidators = [
     .trim()
     .custom(async value => {
       try {
-        const regKey = await RegKey.findOneAndDelete({ key: value })
+        const regKey = await RegKey.findOne({ key: value })
         if (!regKey) {
           return Promise.reject(new Error('Некорректный ключ'))
         }

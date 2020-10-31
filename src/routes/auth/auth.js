@@ -13,12 +13,14 @@ const { hasError } = require('../../middleware/validate.middleware')
 const limitor = require('../../middleware/limit.middleware')
 
 const User = require('../../models/User')
+const RegKey = require('../../models/RegKey')
 
 const { BCRYPT_SALT } = require('../../config/keys')
 
 router.post('/signup', signUpValidators, hasError, async (req, res) => {
   try {
-    const { name, email, password } = req.body
+    const { name, email, password, key } = req.body
+    await RegKey.findOneAndDelete({ key })
     const user = await new User({
       name,
       email,
