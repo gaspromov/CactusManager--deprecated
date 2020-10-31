@@ -37,4 +37,10 @@ form{
     row-gap: 15px;
 }
 
-form span:first-child{padding-bottom: 10px;}
+.inputs{display: grid; row-gap: 20px;}
+form span:first-child{padding-bottom: 15px;}
+.input .input-error{left: 15px;}
+input.ng-invalid.ng-touched{border-color: #F65151;}
+/* input.ng-valid */
+button:disabled{cursor: not-allowed;}
+span.error{color: #F65151; font-size: 14px; position: absolute; top: -5px; left: 15px; line-height: 22px; transform: translate(0%, -50%); }

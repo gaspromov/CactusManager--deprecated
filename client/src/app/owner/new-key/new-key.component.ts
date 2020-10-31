@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { GeneratorService } from 'src/app/shared/services/generator/generator.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AIOService } from 'src/app/shared/services/AIO/aio.service';
+import { OwnerService } from 'src/app/shared/services/owner/owner.service';
 
 @Component({
   selector: 'app-new-key',
@@ -10,12 +12,22 @@ export class NewKeyComponent implements OnInit {
   @Output() onClose = new EventEmitter<boolean>();
   
   key: string = '';
+  formDataKey: FormGroup; 
+  status = new FormControl({ value: 'lifetime', disabled: false });
 
   constructor(
-    private generator: GeneratorService,
+    private aio: AIOService,
+    private http: OwnerService,
   ) { }
 
   ngOnInit(): void {
+    this.formDataKey = new FormGroup({
+      status: this.status,
+      user: new FormControl({value: '', disabled: false}, [Validators.required]),
+      quantity: new FormControl({value: '', disabled: false}, [ Validators.required ]),
+      expresIn: new FormControl({value: '', disabled: false}),
+      key: new FormControl({ value: '', disabled: false })
+    })
   }
 
   copy(id){
@@ -36,8 +48,17 @@ export class NewKeyComponent implements OnInit {
     this.onClose.emit(false);
   }
 
-  newKey(){
-    let key = this.generator.generateKey();
-    this.key = key;
+  async newKey(){
+    this.formDataKey.value.expresIn = new Date(this.formDataKey.value.expresIn);
+    this.formDataKey.value.key = this.aio.generateKey();
+
+    await this.http.postNewLicense(this.formDataKey.value)
+      .then( (w: any) => {
+        this.key = this.formDataKey.value.key;
+      })
+      .catch( e => {
+        console.log(e);
+      })
+
   }
 }

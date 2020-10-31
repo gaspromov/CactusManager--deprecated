@@ -39,3 +39,7 @@ td.action{
     column-gap: 15px;
     place-items: center;
 }
+
+td input{
+    background-color: #EAEAEA;
+}

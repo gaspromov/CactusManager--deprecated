@@ -8,10 +8,18 @@
                     <span class="hr"></span>
                 </span>
     
-                <input type="text" name="email" id="email" class="standart-input" placeholder="E-mail" formControlName="email">
-                <div class="password-inp">
-                    <input type="password" name="password" id="password" placeholder="Password" class="standart-input" formControlName="password">
-                    <a routerLink="/">Forgot password?</a>
+
+                <div class="inputs relative">
+                    <span class="error" *ngIf="errorMessage">
+                        {{ errorMessage }}
+                    </span>
+
+                    <input type="email" name="email" id="email" class="standart-input email" placeholder="E-mail" formControlName="email" [ngClass]="{'error': errorMessage}">
+
+                    <div class="password-inp">
+                        <input type="password" name="password" id="password" placeholder="Password" class="standart-input" formControlName="password" [ngClass]="{'error': errorMessage}">
+                        <a routerLink="/">Forgot password?</a>
+                    </div>
                 </div>
     
                 <button class="standart-btn linear-btn">Login</button>

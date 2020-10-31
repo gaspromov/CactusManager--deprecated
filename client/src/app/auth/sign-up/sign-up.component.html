@@ -9,12 +9,22 @@
                     <span class="hr"></span>
                 </span>
     
-                <input formControlName="name" type="text" name="organisation-name" id="organisation-name" class="standart-input" placeholder="Organisation name">
-                <input formControlName="email" type="text" name="email" id="email" class="standart-input" placeholder="E-mail">
-                <input formControlName="password" type="password" name="password" id="password" placeholder="Password" class="standart-input">
-                <input formControlName="key" type="text" name="key" id="key" class="standart-input" placeholder="Register key" autocomplete="off">
-    
-                <button class="standart-btn linear-btn">Sign Up</button>
+                <div class="inputs relative">
+
+                    <span class="error" *ngIf="errorMessage">
+                        {{ errorMessage }}
+                    </span>
+                    
+                    <input formControlName="name" type="text" name="organisation-name" id="organisation-name" class="standart-input" placeholder="Organisation name">
+                    <input formControlName="email" type="text" name="email" id="email" class="standart-input" placeholder="E-mail">
+                    <div class="input relative">
+                        <span class="input-error" *ngIf="signUpForm.controls.password.invalid && !signUpForm.controls.password.untouched">6 characters - minimum length</span>
+                        <input formControlName="password" type="password" name="password" id="password" placeholder="Password" class="standart-input">
+                    </div>
+                    <input formControlName="key" type="text" name="key" id="key" class="standart-input" placeholder="Register key" autocomplete="off">
+
+                </div>
+                <button class="standart-btn linear-btn" [disabled]="signUpForm.invalid">Sign Up</button>
             </form>
     
             <span class="or"><span class="hr"></span>or<span class="hr"></span></span>

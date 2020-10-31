@@ -1,4 +1,4 @@
-<div class="new-key">
+<form [formGroup]="formDataKey" class="new-key">
     <span class="head">
         <h3>New key</h3>
         <img src="/assets/img/icons/plus.svg" alt="close" class="pointer" (click)="close()">
@@ -9,13 +9,28 @@
         <div class="type">
             <h4>Type:</h4>
             <div class="checkbox-1-2">
-                <input type="radio" name="type" id="newRenewal">
+                <input type="radio" name="status" id="newRenewal" value="renewal" formControlName="status">
                 <label for="newRenewal" class="pointer">Renewal</label>
             </div>
             <div class="checkbox-1-2">
-                <input type="radio" name="type" id="newLifetime" checked>
+                <input type="radio" name="status" id="newLifetime" value="lifetime" formControlName="status">
                 <label for="newLifetime" class="pointer">Lifetime</label>
             </div>
+        </div>
+
+        <div class="renew-date" *ngIf="status.value == 'renewal'">
+            <h4>Renewal date:</h4>
+            <input type="date" name="date" id="date" formControlName="expresIn">
+        </div>
+
+        <div class="nickname">
+            <h4>Nickname:</h4>
+            <input type="text" id="nickname" autocomplete="off" placeholder="Nickname#8888" formControlName="user">
+        </div>
+
+        <div class="activate-quantity">
+            <h4>Activations quantity:</h4>
+            <input type="text" placeholder="3" formControlName="quantity">
         </div>
 
         <button class="standart-btn border-btn" (click)="newKey()">Generate</button>
@@ -30,5 +45,5 @@
         </button>
     </div>
 
-</div>
+</form>
 <div class="artboard blur dark" (click)="close()"></div>

@@ -46,16 +46,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Nickname#0909</td>
-                        <td>Cact-us05-Web0-gas5</td>
-                        <td>renewal</td>
-                        <td>20.10.2020</td>
-                        <td>20.11.2020</td>
-                        <td>3/200</td>
-                        <td class="action">
-                            <img src="/assets/img/icons/edit.svg" alt="edit" class="pointer">
-                            <img src="/assets/img/icons/delete.svg" alt="delete" class="pointer">
+                    <tr [formGroup]="formEditLicense" *ngFor="let license of licenses">
+
+                        <td *ngIf="editingLicense._id != license._id"> {{ license.user }} </td>
+                        <td *ngIf="editingLicense._id == license._id"> <input type="text" formControlName="user"> </td>
+
+                        <td> {{ license.key }} </td>
+                        
+                        <td *ngIf="editingLicense._id != license._id"> {{ license.status }} </td>
+                        <td *ngIf="editingLicense._id == license._id"> <input type="text" formControlName="status"> </td>
+
+                        <td> {{ license.createdAt }} </td>
+
+                        <td *ngIf="editingLicense._id != license._id"> {{ license.expresIn }} </td>
+                        <td *ngIf="editingLicense._id == license._id"> <input type="text" formControlName="expresIn"> </td>
+
+                        <td *ngIf="editingLicense._id != license._id"> {{ license.quantity }} </td>
+                        <td *ngIf="editingLicense._id == license._id"> <input type="text" formControlName="quantity"> </td>
+
+                        <td class="action" *ngIf="editingLicense._id != license._id">
+                            <img src="/assets/img/icons/edit.svg" alt="edit" class="pointer" (click)="editLicense(license._id)">
+                            <img src="/assets/img/icons/delete.svg" alt="delete" class="pointer" (click)="deleteLicense(license._id)">
+                        </td>
+
+                        <td class="action" *ngIf="editingLicense._id == license._id">
+                            <img src="/assets/img/icons/confirm.svg" alt="edit" class="pointer" (click)="onEditLicense()">
+                            <img src="/assets/img/icons/cancel.svg" alt="delete" class="pointer" (click)="onCancelLicense()">
                         </td>
                     </tr>
                     

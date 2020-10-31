@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AdminService } from 'src/app/shared/services/admin/admin.service';
+import { AIOService } from 'src/app/shared/services/AIO/aio.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { GeneratorService } from 'src/app/shared/services/generator/generator.service';
 
 @Component({
   selector: 'app-new-registr-key',
@@ -14,7 +14,7 @@ export class NewRegistrKeyComponent implements OnInit {
   key: string = '';
 
   constructor(
-    private generator: GeneratorService,
+    private aio: AIOService,
     private http: AdminService,
     private auth: AuthService,
   ) { }
@@ -41,7 +41,7 @@ export class NewRegistrKeyComponent implements OnInit {
   }
 
   newKey(){
-    let key = this.generator.generateKey();
+    let key = this.aio.generateKey();
     this.http.newRegKey(key)
       .then(w => {
         this.key = key;
