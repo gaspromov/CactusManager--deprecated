@@ -62,7 +62,7 @@ router.patch(
       if (!user) {
         return res
           .status(400)
-          .json({ message: 'Не удалось удалить пользователя' })
+          .json({ message: 'Не удалось изменить пользователя' })
       }
       return res.status(200).json(user)
     } catch (e) {
