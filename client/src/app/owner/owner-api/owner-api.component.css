@@ -1,0 +1,64 @@
+.content-in>div{
+    display: grid;
+    padding: 15px 30px;
+    row-gap: 40px;
+    align-items: start;
+}
+
+.content-in>div>div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 35px;
+}
+
+.example{
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.example>h2{
+    font-size: 26px;
+    font-weight: 500;
+
+    line-height: 47px;
+}
+
+.card{
+    border-radius: 15px;
+    box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.25);
+    padding: 10px 25px;
+
+    display: grid;
+    grid-template-rows: 1fr auto;
+    row-gap: 20px;
+}
+
+.card .head{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
+.head h3{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 38px;
+    color: #509BFF;
+}
+.card .head > *:last-child{justify-self: end;}
+
+.params h3{
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 35px;
+}
+
+.params>div{
+    display: grid;
+}
+
+.params>div>span.data{
+    font-size: 20px;
+    line-height: 31px;
+    padding-left: 30px;
+}
