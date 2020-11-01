@@ -58,7 +58,7 @@ router.patch(
         id,
         { expiresIn },
         { new: true }
-      )
+      ).select('-password')
       if (!user) {
         return res
           .status(400)
