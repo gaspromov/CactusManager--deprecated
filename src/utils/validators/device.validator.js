@@ -23,5 +23,20 @@ module.exports.addDeviceValidators = [
 ]
 
 module.exports.deleteDeviceValidators = [
-  body('id', 'Некорректный ID').exists().trim().notEmpty().isMongoId()
+  body('key', 'Некорректный ключ')
+    .exists()
+    .trim()
+    .notEmpty()
+    .matches(/^\w{4}-\w{4}-\w{4}-\w{4}$/)
+    .custom(async value => {
+      try {
+        const license = await License.findOne({ key: value })
+        if (!license) {
+          return Promise.reject(new Error('Данный ключ не существует'))
+        }
+        return true
+      } catch (e) {
+        return Promise.reject(new Error('Неизвестная ошибка'))
+      }
+    })
 ]
