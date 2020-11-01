@@ -29,7 +29,7 @@ module.exports.addLicenseValidators = [
     .trim()
     .notEmpty()
     .isIn(['lifetime', 'renewal']),
-  body('expiresIn', 'Некорректная дата').isAfter(),
+  body('expiresIn', 'Некорректная дата').toDate().isAfter(),
   body('quantity', 'Некорректное количество использований')
     .exists()
     .trim()
@@ -49,7 +49,7 @@ module.exports.editLicenseValidators = [
     .trim()
     .notEmpty()
     .isIn(['lifetime', 'renewal']),
-  body('expiresIn', 'Некорректная дата').isAfter(),
+  body('expiresIn', 'Некорректная дата').toDate().isAfter(),
   body('quantity', 'Некорректное количество использований')
     .exists()
     .trim()
