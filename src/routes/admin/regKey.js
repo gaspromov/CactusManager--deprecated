@@ -1,11 +1,11 @@
 const router = require('express').Router()
 
-const adminAuth = require('../middleware/admin.middleware')
+const adminAuth = require('../../middleware/admin.middleware')
 
-const { regKeyValidators } = require('../utils/validators')
-const { hasError } = require('../middleware/validate.middleware')
+const { regKeyValidators } = require('../../utils/validators')
+const { hasError } = require('../../middleware/validate.middleware')
 
-const RegKey = require('../models/RegKey')
+const RegKey = require('../../models/RegKey')
 
 router.post('/', adminAuth, regKeyValidators, hasError, async (req, res) => {
   try {
