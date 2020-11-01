@@ -10,6 +10,7 @@ module.exports.signUpValidators = [
   body('email', 'Некорректный email')
     .exists()
     .trim()
+    .normalizeEmail()
     .isEmail()
     .custom(async value => {
       try {
@@ -59,7 +60,12 @@ module.exports.regKeyValidators = [
 ]
 
 module.exports.signInValidators = [
-  body('email', 'Введите email').exists().trim().notEmpty().isEmail(),
+  body('email', 'Введите email')
+    .exists()
+    .trim()
+    .notEmpty()
+    .normalizeEmail()
+    .isEmail(),
   body('password', 'Введите пароль').exists().trim().notEmpty()
 ]
 

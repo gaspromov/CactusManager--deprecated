@@ -19,6 +19,10 @@ const userSchema = new Schema(
       type: Date,
       required: true,
       default: Date.now
+    },
+    expiresIn: {
+      type: Date,
+      required: true
     }
   },
   { versionKey: false }
