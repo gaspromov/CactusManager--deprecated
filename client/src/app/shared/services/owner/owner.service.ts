@@ -29,12 +29,18 @@ export class OwnerService {
 
   async deleteLicense(id: string){
     this.setHeaders();
-    return await this.http.delete(`${this.url}/licenses`, { headers: this.headers }).toPromise();
+    let opt = { headers: this.headers, body: {id: id}};
+    return await this.http.delete(`${this.url}/licenses`, opt).toPromise();
   }
 
   async putLicense(data){
     this.setHeaders();
     return await this.http.patch( `${this.url}/licenses`, data, { headers: this.headers } ).toPromise();
+  }
+
+  async getSelf(){
+    this.setHeaders();
+    return await this.http.get( `${this.url}/users/@me`, { headers: this.headers } ).toPromise();
   }
 
 }

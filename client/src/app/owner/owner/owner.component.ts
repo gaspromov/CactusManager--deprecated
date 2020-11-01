@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OwnerService } from 'src/app/shared/services/owner/owner.service';
 
 @Component({
   selector: 'app-owner',
@@ -12,7 +13,7 @@ export class OwnerComponent implements OnInit {
     
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
   }
 
 }

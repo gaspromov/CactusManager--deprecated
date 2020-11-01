@@ -43,7 +43,7 @@ h4{
     display: grid;
     row-gap: 10px;
 }
-.data>.type{
+.data>.type, .data>.activate-quantity{
     display: grid;
     grid-template-columns: auto auto 1fr;
     column-gap: 15px;
@@ -53,10 +53,13 @@ h4{
 .data>div{
     display: grid;
     grid-template-columns: auto 1fr;
-    column-gap: 10px;
+    column-gap: 10px !important;
     align-items: center;
     justify-items: start;
 }
+.activate-quantity>input{width: 50px;}
+.activate-quantity .input label{transform: rotate(90deg);}
+.input{display: grid; grid-template-columns: auto 1fr; column-gap: 5px; align-items: center;}
 
 .data button{
     justify-self: start;
@@ -70,6 +73,7 @@ div.key{
     display: grid;
     grid-template-columns: auto 1fr auto;
     column-gap: 10px;
+    padding-top: 5px;
 }
 
 span.key{
@@ -90,3 +94,14 @@ span.key{
 input[type="text"], input[type="date"]{
     border-bottom: 1px solid #3d3d3d;
 }
+button:active{
+    background-color: #78AFF8;
+}
+
+span.error{
+    position: absolute;
+    bottom: 0px;
+    transform: translate(0%, +100%);
+    color: #F65151;
+    font-size: 12px;
+}  

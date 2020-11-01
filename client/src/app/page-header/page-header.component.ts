@@ -7,12 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PageHeaderComponent implements OnInit {
   @Input() pageName: string = '';
-  userName: string = 'Username';
   @Input() data: string = '';
-
-  constructor() { }
+  @Input() isAdmin: boolean = false;
+  userName: string = '';
 
   ngOnInit(): void {
+    this.userName = this.isAdmin ? 'Admin' : localStorage.getItem('userName');
   }
 
 }

@@ -67,3 +67,7 @@ span.key{
     padding: 0;
     place-items: center;
 }
+
+button:active{
+    background-color: #78AFF8;
+}
