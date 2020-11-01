@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AIOService } from 'src/app/shared/services/AIO/aio.service';
 import { OwnerService } from 'src/app/shared/services/owner/owner.service';
 import { SeoService } from 'src/app/shared/services/seo/seo.service'
@@ -16,11 +17,23 @@ export class KeysComponent implements OnInit {
   editingLicense: any = {};
   formEditLicense: FormGroup;
 
+  
+  filterParams = [
+    {key: 'status', status: false, str: 'renewal'},
+    {key: 'status', status: false, str: 'lifetime'}
+  ]
+  filterChange: boolean = false;
+
+  searchParam: string = '';
+  searchKeys = ['key', 'user', 'outputExpiresIn', 'createdAt']
+
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private seo: SeoService,
     private http: OwnerService,
     private aio: AIOService,
+    private spinner: NgxSpinnerService,
   ) { 
     let data: any = this.activatedRoute.data.pipe();
     data = data._value;
@@ -37,30 +50,34 @@ export class KeysComponent implements OnInit {
   }
 
   async getLicenses(){
+    this.spinner.show()
     await this.http.getLicenses()
       .then( (w: any = [{}]) => {
 
         this.licenses = w.map(license => ({
           ...license,
-          createdAt: this.aio.validDate(license.createdAt),
-          expresIn: this.aio.validDate(license.expresIn)
+          createdAt: this.aio.outputDate(new Date(license.createdAt)),
+          outputExpiresIn: this.aio.outputDate(new Date(license.expiresIn || '')) || '-' ,
+          expiresIn: new Date(license.expiresIn || '') || ''
         }))
-        console.log(w);
+      this.spinner.hide()  
       })
       .catch( e => {console.log(e)})
   }
 
   async deleteLicense(id: string){
+    this.spinner.show()
     await this.http.deleteLicense(id)
       .then( async() => { await this.getLicenses() })
       .catch( e => { console.log(e) })
   }
 
   async onEditLicense(){
+    this.spinner.show()
+    this.formEditLicense.value.expiresIn = this.formEditLicense.value.status == 'lifetime' ? new Date : this.formEditLicense.value.expiresIn;
     await this.http.putLicense(this.formEditLicense.value)
-      .then( async() => {await this.getLicenses(); this.formEditLicense.reset();})
+      .then( async() => {await this.getLicenses(); this.formEditLicense.reset(); this.editingLicense = {};})
       .catch( e => {console.log(e)} )
-    this.editingLicense = {};
   }
 
   async editLicense(id){
@@ -70,26 +87,27 @@ export class KeysComponent implements OnInit {
         this.generateFormGroup();
         return false;
       }
-    });
 
+    });
   }
 
   onCancelEdit(){
-    this.editingLicense = {};
     this.formEditLicense.reset();
+    this.editingLicense = {};
   }
 
   generateFormGroup(){
+
     this.formEditLicense = new FormGroup({
       id: new FormControl( { value: this.editingLicense._id || '', disabled: false } ),
       user: new FormControl( { value: this.editingLicense.user || '', disabled: false } ),
-      // key: new FormControl( { value: this.editingLicense.key || '', disabled: false } ),
-      // createdAt: new FormControl( { value: this.editingLicense.createdAt || '', disabled: false } ),
-      // owner: new FormControl( { value: this.editingLicense.owner || '', disabled: false } ),
-      expresIn: new FormControl( { value: this.editingLicense.expresIn || '', disabled: false } ),
+      expiresIn: new FormControl( { value: this.aio.validDate(this.editingLicense.expiresIn || ''), disabled: false } ),
       status: new FormControl( { value: this.editingLicense.status || '', disabled: false } ),
-      quantity: new FormControl( { value: this.editingLicense.quantity || '', disabled: false } )
+      quantity: new FormControl( { value: this.editingLicense.quantity, disabled: false } )
     })
   }
 
+  onFilterChange(){
+    this.filterChange = !this.filterChange;
+  }
 }

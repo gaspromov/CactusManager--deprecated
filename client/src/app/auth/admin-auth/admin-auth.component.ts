@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class AdminAuthComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -24,13 +26,15 @@ export class AdminAuthComponent implements OnInit {
   }
 
   async login(){
-    if (this.loginForm.valid)
+    if (this.loginForm.valid){
+      this.spinner.show();
       await this.auth.adminLogin(this.loginForm.value)
         .then( (w: any) =>{
           this.auth.setAdminToken(w.accessToken);
           this.router.navigate(['/admin']);
         })
-        .catch(e => {console.log(e)})
+        .catch(e => {console.log(e); this.spinner.hide();})
+    }
   }
 
 }

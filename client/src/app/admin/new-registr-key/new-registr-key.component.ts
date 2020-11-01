@@ -23,22 +23,13 @@ export class NewRegistrKeyComponent implements OnInit {
   }
 
   copy(id){
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = document.getElementById('key').innerHTML;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
+    this.aio.copy(id);
   }
 
   close(){
     this.onClose.emit(false);
   }
+
 
   newKey(){
     let key = this.aio.generateKey();

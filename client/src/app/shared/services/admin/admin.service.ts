@@ -21,4 +21,21 @@ export class AdminService {
     this.setHeader();
     return await this.http.post(`${this.url}/regkey`, {key: key}, {headers: this.headers}).toPromise();
   }
+
+  async getUsers(){
+    this.setHeader();
+    return await this.http.get(`${this.url}/users`, { headers: this.headers }).toPromise();
+  }
+
+  async deleteUser(id: string){
+    this.setHeader();
+    let opt = { headers: this.headers, body: { id : id } }
+    return await this.http.delete(`${this.url}/users`, opt).toPromise();
+  }
+
+  async putUser(data){
+    this.setHeader();
+    return await this.http.patch(`${this.url}/users`, data, { headers: this.headers }).toPromise();
+  }
+
 }

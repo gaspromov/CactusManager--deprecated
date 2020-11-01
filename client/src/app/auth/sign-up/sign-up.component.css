@@ -44,3 +44,11 @@ input.ng-invalid.ng-touched{border-color: #F65151;}
 /* input.ng-valid */
 button:disabled{cursor: not-allowed;}
 span.error{color: #F65151; font-size: 14px; position: absolute; top: -5px; left: 15px; line-height: 22px; transform: translate(0%, -50%); }
+
+.border-btn:hover{
+    border-color: #E4F0FF;
+}
+
+.linear-btn:hover{
+    filter: brightness(1.1);
+}

@@ -24,7 +24,7 @@
                     <input formControlName="key" type="text" name="key" id="key" class="standart-input" placeholder="Register key" autocomplete="off">
 
                 </div>
-                <button class="standart-btn linear-btn" [disabled]="signUpForm.invalid">Sign Up</button>
+                <button class="standart-btn linear-btn">Sign Up</button>
             </form>
     
             <span class="or"><span class="hr"></span>or<span class="hr"></span></span>
@@ -37,4 +37,10 @@
     <div class="background-cover">
 
     </div>
+    <ngx-spinner
+    type="ball-clip-rotate"
+    size="large"
+    [fullScreen]="true"
+    class="absolute"
+    ></ngx-spinner>
 </div>

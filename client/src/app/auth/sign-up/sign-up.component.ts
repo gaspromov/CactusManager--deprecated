@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { SeoService } from 'src/app/shared/services/seo/seo.service';
 
@@ -18,10 +19,12 @@ export class SignUpComponent implements OnInit {
     private seo: SeoService,
     private auth: AuthService,
     private router: Router,
+    private spinner: NgxSpinnerService,
   ) {
     let data: any = this.activatedRoute.data.pipe();
     data = data._value;
     this.seo.changeTitle(data.title);
+    this.seo.changeUrl(this.router.url);
   }
 
   ngOnInit(): void {
@@ -35,6 +38,7 @@ export class SignUpComponent implements OnInit {
 
   async signUp(){
     this.errorMessage = '';
+    this.spinner.show();
     await this.auth.ownerSignUp(this.signUpForm.value)
       .then( (w: any) => {
         this.auth.setOwnerToken(w.accessToken);
@@ -43,6 +47,7 @@ export class SignUpComponent implements OnInit {
       .catch(e => {
         console.log(e)
         this.errorMessage = e.error.message;
+        this.spinner.hide();
       })
   }
 

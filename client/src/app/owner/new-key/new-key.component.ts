@@ -10,10 +10,13 @@ import { OwnerService } from 'src/app/shared/services/owner/owner.service';
 })
 export class NewKeyComponent implements OnInit {
   @Output() onClose = new EventEmitter<boolean>();
+  @Output() onAdd = new EventEmitter<boolean>();
   
+  infinityActivating: boolean = false;
   key: string = '';
   formDataKey: FormGroup; 
   status = new FormControl({ value: 'lifetime', disabled: false });
+  errorMessage: string = '';
 
   constructor(
     private aio: AIOService,
@@ -25,23 +28,14 @@ export class NewKeyComponent implements OnInit {
       status: this.status,
       user: new FormControl({value: '', disabled: false}, [Validators.required]),
       quantity: new FormControl({value: '', disabled: false}, [ Validators.required ]),
-      expresIn: new FormControl({value: '', disabled: false}),
+      expiresIn: new FormControl({value: '', disabled: false}),
       key: new FormControl({ value: '', disabled: false })
     })
+    console.log(this.infinityActivating);
   }
 
   copy(id){
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = document.getElementById('key').innerHTML;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
+    this.aio.copy(id);
   }
 
   close(){
@@ -49,16 +43,28 @@ export class NewKeyComponent implements OnInit {
   }
 
   async newKey(){
-    this.formDataKey.value.expresIn = new Date(this.formDataKey.value.expresIn);
+    this.formDataKey.value.expiresIn = this.status.value == 'lifetime' ? new Date() : this.formDataKey.value.expiresIn;  
     this.formDataKey.value.key = this.aio.generateKey();
 
-    await this.http.postNewLicense(this.formDataKey.value)
-      .then( (w: any) => {
-        this.key = this.formDataKey.value.key;
-      })
-      .catch( e => {
-        console.log(e);
-      })
+    this.formDataKey.value.quantity = this.infinityActivating ? 0 : this.formDataKey.value.quantity;
 
+    if (this.formDataKey.valid){
+      this.errorMessage = '';
+      await this.http.postNewLicense(this.formDataKey.value)
+        .then( (w: any) => {
+          this.key = this.formDataKey.value.key;
+          this.onAdd.emit();
+        })
+        .catch( e => {
+          console.log(e);
+          this.errorMessage = e.error.message;
+        })
+    }
+    else this.errorMessage = 'Заполните все поля'
+
+  }
+
+  onInfinity(){
+      this.infinityActivating ? this.formDataKey.controls.quantity.disable() : this.formDataKey.controls.quantity.enable()
   }
 }

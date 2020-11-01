@@ -50,13 +50,16 @@ form > *:nth-child(2){margin-bottom: 5px;}
     color: #316CC3;
     font-size: 12px;
 }
-
-.border-btn:hover{
-    background: linear-gradient(91.44deg, #9DC2F3 0%, #91DCF4 100%);
-}
-
 .inputs{display: grid; row-gap: 30px; position: relative;}
 span.error{color: #F65151; font-size: 14px; position: absolute; top: -5px; left: 15px; line-height: 22px; transform: translate(0%, -50%); }
 .input-error{left: 15px;}
 
 .ng-touched.ng-invalid{border-color: #F65151;}
+
+.border-btn:hover{
+    border-color: #E4F0FF;
+}
+
+.linear-btn:hover{
+    filter: brightness(1.1);
+}

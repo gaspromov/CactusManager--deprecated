@@ -24,6 +24,7 @@ import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar.com
 import { AdminComponent } from './admin/admin/admin.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { NewRegistrKeyComponent } from './admin/new-registr-key/new-registr-key.component';
+import { FilterPipe } from './shared/pipes/filter/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { NewRegistrKeyComponent } from './admin/new-registr-key/new-registr-key.
     AdminSideBarComponent,
     AdminComponent,
     AdminUsersComponent,
-    NewRegistrKeyComponent
+    NewRegistrKeyComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
