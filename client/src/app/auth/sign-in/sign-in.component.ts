@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SeoService } from 'src/app/shared/services/seo/seo.service';
@@ -33,6 +33,7 @@ export class SignInComponent implements OnInit {
       password: new FormControl({ value: '', disabled: false }, [Validators.required])
     })
   }
+
 
   async login(){
       this.spinner.show();

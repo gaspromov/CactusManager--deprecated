@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewChecked, Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from './shared/services/auth/auth.service';
 import { OwnerService } from './shared/services/owner/owner.service';
@@ -33,8 +33,8 @@ export class AppComponent implements OnInit{
           if ( e.status == 401 )
             this.auth.ownerLogout();
         })
-    this.firstLoad = false;
     this.spinner.hide();
+    this.firstLoad = false;
   }
-
+  
 }
