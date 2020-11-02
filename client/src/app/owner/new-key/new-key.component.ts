@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AIOService } from 'src/app/shared/services/AIO/aio.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { OwnerService } from 'src/app/shared/services/owner/owner.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class NewKeyComponent implements OnInit {
   constructor(
     private aio: AIOService,
     private http: OwnerService,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +58,8 @@ export class NewKeyComponent implements OnInit {
           this.onAdd.emit();
         })
         .catch( e => {
+          if (e.status == 401)
+            this.auth.ownerLogout()
           console.log(e);
           this.errorMessage = e.error.message;
         })

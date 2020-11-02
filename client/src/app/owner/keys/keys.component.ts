@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AIOService } from 'src/app/shared/services/AIO/aio.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { OwnerService } from 'src/app/shared/services/owner/owner.service';
 import { SeoService } from 'src/app/shared/services/seo/seo.service'
 
@@ -34,6 +35,7 @@ export class KeysComponent implements OnInit {
     private http: OwnerService,
     private aio: AIOService,
     private spinner: NgxSpinnerService,
+    private auth: AuthService,
   ) { 
     let data: any = this.activatedRoute.data.pipe();
     data = data._value;
@@ -62,14 +64,22 @@ export class KeysComponent implements OnInit {
         }))
       this.spinner.hide()  
       })
-      .catch( e => {console.log(e)})
+      .catch( e => {
+        if (e.status == 401)
+          this.auth.ownerLogout();
+        console.log(e)
+      })
   }
 
   async deleteLicense(id: string){
     this.spinner.show()
     await this.http.deleteLicense(id)
       .then( async() => { await this.getLicenses() })
-      .catch( e => { console.log(e) })
+      .catch( e => { 
+        if (e.status == 401)
+          this.auth.ownerLogout();
+        console.log(e) 
+      })
   }
 
   async onEditLicense(){
@@ -77,7 +87,11 @@ export class KeysComponent implements OnInit {
     this.formEditLicense.value.expiresIn = this.formEditLicense.value.status == 'lifetime' ? new Date : this.formEditLicense.value.expiresIn;
     await this.http.putLicense(this.formEditLicense.value)
       .then( async() => {await this.getLicenses(); this.formEditLicense.reset(); this.editingLicense = {};})
-      .catch( e => {console.log(e)} )
+      .catch( e => {
+        if (e.status == 401)
+          this.auth.ownerLogout();
+        console.log(e)
+      } )
   }
 
   async editLicense(id){

@@ -6,6 +6,7 @@ import { AdminService } from 'src/app/shared/services/admin/admin.service';
 import { AIOService } from 'src/app/shared/services/AIO/aio.service';
 import { SeoService } from 'src/app/shared/services/seo/seo.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-admin-users',
@@ -28,6 +29,7 @@ export class AdminUsersComponent implements OnInit {
     private http: AdminService,
     private aio: AIOService,
     private spinner: NgxSpinnerService,
+    private auth: AuthService,
   ) { 
     let data: any = this.activatedRoute.data.pipe();
     data = data._value;
@@ -51,7 +53,10 @@ export class AdminUsersComponent implements OnInit {
         }))
         this.spinner.hide();
       })
-      .catch( e => {console.log(e)})
+      .catch( e => {
+        if (e.status == 401)
+          this.auth.adminLogout();
+        console.log(e)})
   }
 
   async onDeleteUser(id){
@@ -60,7 +65,11 @@ export class AdminUsersComponent implements OnInit {
       .then( async() => {
         await this.getUsers()
       })
-      .catch( e => {console.log(e)})
+      .catch( e => {
+        if (e.status == 401)
+          this.auth.adminLogout();
+        console.log(e)
+      })
   }
 
   async editUser(id){
@@ -77,7 +86,11 @@ export class AdminUsersComponent implements OnInit {
     this.spinner.show()
     await this.http.putUser(this.formEditUser.value)
       .then( async() => {await this.getUsers(); this.formEditUser.reset(); this.editingUser = {};})
-      .catch( e => {console.log(e)} )
+      .catch( e => {
+        if (e.status == 401)
+          this.auth.adminLogout();
+        console.log(e)
+      } )
   }
   
   onCancelEdit(){
