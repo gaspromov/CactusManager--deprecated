@@ -33,6 +33,8 @@ export class AuthService {
 
   ownerLogout(){
     localStorage.removeItem('ownerAccessToken');
+    localStorage.removeItem('ownerName');
+    localStorage.removeItem('ownerEmail');
     this.router.navigate(['/login']);
   }
 

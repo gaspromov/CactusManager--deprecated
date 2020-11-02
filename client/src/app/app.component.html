@@ -1,15 +1,2 @@
 <router-outlet></router-outlet>
 
-<ngx-spinner
-*ngIf="firstLoad"
-type="ball-clip-rotate"
-size="small"
-zIndex='1000000'
-[fullScreen]="true"
-class="absolute"
->
-<div class="loading">
-    <img src="/assets/img/logo/cactusweb_logo.svg" alt="CactusManager">
-    <p>Loading...</p>
-</div>
-</ngx-spinner>

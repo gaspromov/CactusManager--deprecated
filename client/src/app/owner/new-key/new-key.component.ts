@@ -33,7 +33,6 @@ export class NewKeyComponent implements OnInit {
       expiresIn: new FormControl({value: '', disabled: false}),
       key: new FormControl({ value: '', disabled: false })
     })
-    console.log(this.infinityActivating);
   }
 
   copy(id){
@@ -45,7 +44,6 @@ export class NewKeyComponent implements OnInit {
   }
 
   async newKey(){
-    console.log(this.formDataKey.value.expiresIn)
     this.formDataKey.value.expiresIn = this.status.value == 'lifetime' ? new Date('2222-02-22') : this.formDataKey.value.expiresIn;  
     this.formDataKey.value.key = this.aio.generateKey();
 
