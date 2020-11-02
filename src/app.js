@@ -25,12 +25,7 @@ app.use('/api/v1/users', require('./routes/users'))
 app.get('*', (req, res) => {
   res.setHeader(
     'Content-Security-Policy',
-    `
-            default-src * 'self'; 
-            script-src * 'self' 'unsafe-inline';
-            style-src * 'self' 'unsafe-inline'; 
-            img-src * 'self' data: https:;
-          `
+    "default-src * 'self'; script-src * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src * 'self' data: https:;"
   )
   return res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'))
 })
