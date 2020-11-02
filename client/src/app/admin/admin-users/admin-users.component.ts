@@ -66,8 +66,10 @@ export class AdminUsersComponent implements OnInit {
         await this.getUsers()
       })
       .catch( e => {
-        if (e.status == 401)
+        if (e.status == 401){
+          this.spinner.hide()
           this.auth.adminLogout();
+        }
         console.log(e)
       })
   }
@@ -87,8 +89,10 @@ export class AdminUsersComponent implements OnInit {
     await this.http.putUser(this.formEditUser.value)
       .then( async() => {await this.getUsers(); this.formEditUser.reset(); this.editingUser = {};})
       .catch( e => {
-        if (e.status == 401)
+        if (e.status == 401){
+          this.spinner.hide()
           this.auth.adminLogout();
+        }
         console.log(e)
       } )
   }

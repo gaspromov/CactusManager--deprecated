@@ -68,6 +68,7 @@ export class KeysComponent implements OnInit {
         if (e.status == 401)
           this.auth.ownerLogout();
         console.log(e)
+        this.spinner.show()
       })
   }
 
@@ -76,20 +77,24 @@ export class KeysComponent implements OnInit {
     await this.http.deleteLicense(id)
       .then( async() => { await this.getLicenses() })
       .catch( e => { 
-        if (e.status == 401)
-          this.auth.ownerLogout();
+        if (e.status == 401){
+          this.spinner.hide()
+          this.auth.adminLogout();
+        }
         console.log(e) 
       })
   }
 
   async onEditLicense(){
     this.spinner.show()
-    this.formEditLicense.value.expiresIn = this.formEditLicense.value.status == 'lifetime' ? new Date : this.formEditLicense.value.expiresIn;
+    this.formEditLicense.value.expiresIn = this.formEditLicense.value.status == 'lifetime' ? new Date('2222-02-22') : this.formEditLicense.value.expiresIn;
     await this.http.putLicense(this.formEditLicense.value)
       .then( async() => {await this.getLicenses(); this.formEditLicense.reset(); this.editingLicense = {};})
       .catch( e => {
-        if (e.status == 401)
-          this.auth.ownerLogout();
+        if (e.status == 401){
+          this.spinner.hide()
+          this.auth.adminLogout();
+        }
         console.log(e)
       } )
   }
