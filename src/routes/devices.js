@@ -11,7 +11,12 @@ router.post('/', addDeviceValidators, hasError, async (req, res) => {
   try {
     const { key, device } = req.body
     const license = await License.findOne({ key })
-    if (!license.quantity || license.devices.length < license.quantity) {
+
+    if (license.devices.includes(device)) {
+      return res.status(200).json({ message: 'Добавлено' })
+    }
+
+    if (license.devices.length < license.quantity || !license.quantity) {
       if (!license.devices.includes(device)) {
         license.devices.push(device)
       }
@@ -20,6 +25,7 @@ router.post('/', addDeviceValidators, hasError, async (req, res) => {
         .status(400)
         .json({ message: 'Привышено максимальное количество использований' })
     }
+
     await license.save()
     return res.status(200).json({ message: 'Добавлено' })
   } catch (e) {
