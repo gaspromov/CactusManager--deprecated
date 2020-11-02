@@ -15,7 +15,7 @@ const limitor = require('../../middleware/limit.middleware')
 const User = require('../../models/User')
 const RegKey = require('../../models/RegKey')
 
-const { BCRYPT_SALT } = require('../../config/keys')
+const { BCRYPT_SALT, ADMIN_LOGIN } = require('../../config/keys')
 
 router.post('/signup', signUpValidators, hasError, async (req, res) => {
   try {
@@ -59,7 +59,7 @@ router.post('/signin', signInValidators, hasError, async (req, res) => {
 
 router.post('/admin', adminValidators, limitor, hasError, async (req, res) => {
   try {
-    const accessToken = await createJWT('admin')
+    const accessToken = await createJWT(ADMIN_LOGIN)
     return res.status(200).json({ accessToken })
   } catch (e) {
     console.log(e)
