@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const { ACCESS_TOKEN_SECRET } = require('../config/keys')
+const { ACCESS_TOKEN_SECRET, ADMIN_LOGIN } = require('../config/keys')
 
 module.exports = (req, res, next) => {
   try {
@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
       return res.status(401).json({ message: 'Нет авторизации' })
     }
     const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET)
-    if (decoded.userId !== 'admin') {
+    if (decoded.userId !== ADMIN_LOGIN) {
       return res.status(401).json({ message: 'Нет авторизации' })
     }
     return next()
