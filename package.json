@@ -9,7 +9,7 @@
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "c:i": "npm install --prefix client",
-    "c:b": "npm build --prefix client",
+    "c:b": "npm run build --prefix client",
     "lint": "eslint --debug src/",
     "lint:write": "eslint --fix --debug src/ ",
     "prettier": "prettier --write src/**/*.js"

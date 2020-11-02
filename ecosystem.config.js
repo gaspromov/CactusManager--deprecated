@@ -17,7 +17,7 @@ module.exports = {
       repo: 'git@github.com:gaspromov/CactusManager.git',
       path: '/var/www/cactus-manager.ru',
       'post-deploy':
-        'npm install && pm2 reload ecosystem.config.js --env production',
+        'npm install && npm run c:i && npm run c:b && pm2 reload ecosystem.config.js --env production',
       'pre-setup': '',
       env: {
         NODE_ENV: 'production'
