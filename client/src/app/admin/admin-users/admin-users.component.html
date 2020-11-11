@@ -21,9 +21,87 @@
 
         <span class="hr grey"></span>
 
-        <div class="users">
+        <div class="users table">
 
-            <table>
+            
+            <div class="tr head">
+
+                <td>User</td>
+                <td>Registration</td>
+                <td>Activity</td>
+                <td>Renewal</td>
+                <td>Edit</td>
+            </div>
+
+            <div class="tbody">
+
+                <div class="tr" *ngFor="let user of users
+                    | search : searchKeys : searchParam
+                " >
+
+                    <ng-template [ngIf]="user._id !== editingUser._id" [ngIfElse]="edit">
+                        <td> {{ user.name }} </td>
+                        <td> {{ user.addedAt }} </td>
+                        <td> ---- </td>
+                        <td > {{ user.outputExpiresIn }} </td>
+        
+                        <td class="action">
+                            <img src="/assets/img/icons/edit.svg" alt="edit" class="pointer" (click)="editUser(user._id)">
+                            <img src="/assets/img/icons/delete.svg" alt="delete" class="pointer" (click)="onDeleteUser(user._id)">
+                        </td>
+
+                    </ng-template>
+
+                    <ng-template [formGroup]="formEditUser" #edit>
+                        <td> {{ user.name }} </td>
+                        <td> {{ user.addedAt }} </td>
+                        <td> ---- </td>
+                        <td> <input type="date" formControlName="expiresIn"> </td>
+        
+                        <td class="action">
+                            <img src="/assets/img/icons/confirm.svg" alt="edit" class="pointer" (click)="onEditUser()">
+                            <img src="/assets/img/icons/cancel.svg" alt="delete" class="pointer" (click)="onCancelEdit()">
+                        </td>
+
+                    </ng-template>
+
+                </div>
+
+            </div>
+
+
+<!-- 
+            <div  *ngFor="let user of users
+            | search : searchKeys : searchParam
+        " [ngSwitch]="user._id">
+
+            <tr *ngSwitchCase="editingUser._id" [formGroup]="formEditUser">
+                <td> {{ user.name }} </td>
+                <td> {{ user.addedAt }} </td>
+                <td> ---- </td>
+                <td> <input type="date" formControlName="expiresIn"> </td>
+
+                <td class="action">
+                    <img src="/assets/img/icons/confirm.svg" alt="edit" class="pointer" (click)="onEditUser()">
+                    <img src="/assets/img/icons/cancel.svg" alt="delete" class="pointer" (click)="onCancelEdit()">
+                </td>
+            </tr>
+            
+            <tr *ngSwitchDefault >
+                <td> {{ user.name }} </td>
+                <td> {{ user.addedAt }} </td>
+                <td> ---- </td>
+                <td > {{ user.outputExpiresIn }} </td>
+
+                <td class="action">
+                    <img src="/assets/img/icons/edit.svg" alt="edit" class="pointer" (click)="editUser(user._id)">
+                    <img src="/assets/img/icons/delete.svg" alt="delete" class="pointer" (click)="onDeleteUser(user._id)">
+                </td>
+            </tr>
+
+        </div> -->
+
+            <!-- <table>
                 <thead>
                     <tr>
                         <td>User</td>
@@ -35,30 +113,39 @@
                 </thead>
 
                 <tbody>
-                    <div>
-                        <tr *ngFor="let user of users
-                            | search : searchParam : searchKeys
-                        " [formGroup]="formEditUser">
+                    
+                    <div  *ngFor="let user of users
+                        | search : searchKeys : searchParam
+                    " [ngSwitch]="user._id">
+
+                        <tr *ngSwitchCase="editingUser._id" [formGroup]="formEditUser">
                             <td> {{ user.name }} </td>
                             <td> {{ user.addedAt }} </td>
                             <td> ---- </td>
-                            <td *ngIf=" editingUser._id != user._id "> {{ user.outputExpiresIn }} </td>
-                            <td *ngIf=" editingUser._id == user._id "> <input type="date" formControlName="expiresIn"> </td>
+                            <td> <input type="date" formControlName="expiresIn"> </td>
     
-                            <td class="action" *ngIf=" editingUser._id != user._id ">
-                                <img src="/assets/img/icons/edit.svg" alt="edit" class="pointer" (click)="editUser(user._id)">
-                                <img src="/assets/img/icons/delete.svg" alt="delete" class="pointer" (click)="onDeleteUser(user._id)">
-                            </td>
-                            <td class="action" *ngIf=" editingUser._id == user._id ">
+                            <td class="action">
                                 <img src="/assets/img/icons/confirm.svg" alt="edit" class="pointer" (click)="onEditUser()">
                                 <img src="/assets/img/icons/cancel.svg" alt="delete" class="pointer" (click)="onCancelEdit()">
+                            </td>
+                        </tr>
+                        
+                        <tr *ngSwitchDefault >
+                            <td> {{ user.name }} </td>
+                            <td> {{ user.addedAt }} </td>
+                            <td> ---- </td>
+                            <td > {{ user.outputExpiresIn }} </td>
+    
+                            <td class="action">
+                                <img src="/assets/img/icons/edit.svg" alt="edit" class="pointer" (click)="editUser(user._id)">
+                                <img src="/assets/img/icons/delete.svg" alt="delete" class="pointer" (click)="onDeleteUser(user._id)">
                             </td>
                         </tr>
 
                     </div>
                 </tbody>
 
-            </table>
+            </table> -->
 
         </div>
 

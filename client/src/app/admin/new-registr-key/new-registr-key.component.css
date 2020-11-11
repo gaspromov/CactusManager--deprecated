@@ -45,6 +45,9 @@ div.new-key > button{
     height: 34px;
     padding: 0;
     border-radius: 10px;
+    
+    font-size: 14px;
+    line-height: 16px;
 }
 
 div.key{
@@ -64,8 +67,9 @@ span.key{
     width: 34px;
     height: 34px;
     border-radius: 10px;
-    padding: 0;
+    padding: 9px;
     place-items: center;
+    
 }
 
 button:active{

@@ -65,10 +65,14 @@ export class KeysComponent implements OnInit {
       this.spinner.hide()  
       })
       .catch( e => {
-        if (e.status == 401)
+        if (e.status == 401){
+          this.spinner.hide();
           this.auth.ownerLogout();
-        console.log(e)
-        this.spinner.show()
+        }
+        else{
+          console.log(e)
+          this.spinner.show()
+        }
       })
   }
 
@@ -91,8 +95,8 @@ export class KeysComponent implements OnInit {
     await this.http.putLicense(this.formEditLicense.value)
       .then( async() => {await this.getLicenses(); this.formEditLicense.reset(); this.editingLicense = {};})
       .catch( e => {
+        this.spinner.hide()
         if (e.status == 401){
-          this.spinner.hide()
           this.auth.adminLogout();
         }
         console.log(e)
@@ -128,5 +132,9 @@ export class KeysComponent implements OnInit {
 
   onFilterChange(){
     this.filterChange = !this.filterChange;
+  }
+
+  search(){
+    console.log('start')
   }
 }

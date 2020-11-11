@@ -28,11 +28,10 @@ table{
 }
 table>*{display: grid;}
 table tr{display: grid; grid-template-columns: .8fr 1fr .5fr .7fr .7fr .5fr 48px; column-gap: 5px;}
-thead{padding: 0px 30px}
+thead{padding: 0px 35px 0px 30px}
 tbody{padding: 0px 30px; overflow-y: scroll; max-height: 100%;}
-tbody > div{
+tbody{
     display: grid;
-    align-self: start;
     row-gap: 5px;
 }
 table thead tr{border-bottom: 1px solid #898988;}

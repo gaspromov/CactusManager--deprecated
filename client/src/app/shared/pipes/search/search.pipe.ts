@@ -5,20 +5,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(arr: any = [], param: string, keys: []): unknown {
+  transform(arr: any = [], searchKeys: any = [], searchParam: string = ''): unknown {
+    console.log(arr, searchKeys, searchParam)
 
-
-    if (arr[0] && param){
+    if (arr[0] && searchParam !== '' && searchKeys[0]){
 
       let filter = arr.filter( ell => {
         let isInclude = false;
-        keys.forEach( key => {
-          if (ell[key] && ell[key].toLowerCase().indexOf(param.toLowerCase()) === 0){
+        searchKeys.forEach(param => {
+          if ( ell && ell[param].toLowerCase().toString().indexOf(searchParam.toLowerCase()) === 0){
             isInclude = true;
             return false;
           }
-        })
+        });
         return isInclude;
+
       })
 
       return filter;

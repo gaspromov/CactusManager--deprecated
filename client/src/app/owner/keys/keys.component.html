@@ -23,7 +23,7 @@
             </div>
 
             <div class="search">
-                <input type="text" placeholder="Search" name="search" id="search" class="search-input" autocomplete="off" [(ngModel)]="searchParam">
+                <input type="text" placeholder="Search" name="search" id="search" class="search-input" autocomplete="off" [(ngModel)]="searchParam" >
                 <img src="/assets/img/icons/search.svg">
             </div>
         </div>
@@ -46,51 +46,61 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <div>
-                        <tr [formGroup]="formEditLicense" *ngFor="let license of licenses
-                            | filter : filterParams : filterChange
-                            | search : searchParam : searchKeys
-                        ">
-    
-                            <td *ngIf="editingLicense._id != license._id"> {{ license.user }} </td>
-                            <td *ngIf="editingLicense._id == license._id"> <input type="text" formControlName="user"> </td>
-    
-                            <td> {{ license.key }} </td>
-                            
-                            <td *ngIf="editingLicense._id != license._id"> {{ license.status }} </td>
-                            <td *ngIf="editingLicense._id == license._id"> 
-                                <select type="text" formControlName="status">
-                                    <option value="renewal">Renewal</option>
-                                    <option value="lifetime">Lifetime</option>
-                                </select> 
-                            </td>
-    
-                            <td> {{ license.createdAt }} </td>
-    
-                            <td *ngIf="editingLicense._id != license._id"> {{ license.outputExpiresIn }} </td>
-                            <td *ngIf="editingLicense._id == license._id"> <input type="date" formControlName="expiresIn"> </td>
-    
-                            <td *ngIf="editingLicense._id != license._id && license.quantity != 0"> {{ license.quantity }} </td>
-                            <td *ngIf="editingLicense._id != license._id && license.quantity == 0" class="infinity"> <span>8</span> </td>
-                            <td *ngIf="editingLicense._id == license._id"> <input type="text" formControlName="quantity"> </td>
-    
-                            <td class="action" *ngIf="editingLicense._id != license._id">
-                                <img src="/assets/img/icons/edit.svg" alt="edit" class="pointer" (click)="editLicense(license._id)">
-                                <img src="/assets/img/icons/delete.svg" alt="delete" class="pointer" (click)="deleteLicense(license._id)">
-                            </td>
-    
-                            <td class="action" *ngIf="editingLicense._id == license._id">
-                                <img src="/assets/img/icons/confirm.svg" alt="edit" class="pointer" (click)="onEditLicense()">
-                                <img src="/assets/img/icons/cancel.svg" alt="delete" class="pointer" (click)="onCancelEdit()">
-                            </td>
-                        </tr>
 
+                    <div >
+                        <ng-template ngFor let-license [ngForOf]="licenses | filter : filterParams : filterChange | search : searchKeys : searchParam">
+                            <tr  *ngIf="editingLicense._id == license._id" [formGroup]="formEditLicense">
+                                <td > <input type="text" formControlName="user"> </td>
+                                <td> {{ license.key }} </td>
+                                <td > 
+                                    <select type="text" formControlName="status">
+                                        <option value="renewal">Renewal</option>
+                                        <option value="lifetime">Lifetime</option>
+                                    </select> 
+                                </td>
+                                <td> {{ license.createdAt }} </td>
+                                <td > <input type="date" formControlName="expiresIn"> </td>
+                                <td > <input type="text" formControlName="quantity"> </td>
+                                <td class="action" >
+                                    <img src="/assets/img/icons/confirm.svg" alt="edit" class="pointer" (click)="onEditLicense()">
+                                    <img src="/assets/img/icons/cancel.svg" alt="delete" class="pointer" (click)="onCancelEdit()">
+                                </td>
+                            </tr>
+
+                            <tr *ngIf="editingLicense._id !== license._id">
+                                <td> {{ license.user }} </td>
+                                <td> {{ license.key }} </td>
+                                <td> {{ license.status }} </td>
+                                <td> {{ license.createdAt }} </td>
+                                <td> {{ license.outputExpiresIn }} </td>
+                                <td *ngIf="license.quantity != 0"> {{ license.quantity }} </td>
+                                <td *ngIf="license.quantity == 0" class="infinity"> <span>8</span> </td>
+
+                                <td class="action">
+                                    <img src="/assets/img/icons/edit.svg" alt="edit" class="pointer" (click)="editLicense(license._id)">
+                                    <img src="/assets/img/icons/delete.svg" alt="delete" class="pointer" (click)="deleteLicense(license._id)">
+                                </td>
+
+                            </tr >
+                            
+
+                        </ng-template>
                     </div>
+                        <!-- <div  *ngFor="let license of licenses
+                            | filter : filterParams : filterChange
+                            | search : searchKeys : searchParam
+                        " [ngSwitch]="license._id">
+
+
+                        </div> -->
                     
                 </tbody>
             </table>
-
         </div>
+
+
+
+
         <app-new-key *ngIf="newKey" (onClose)="onChangeNewKey($event)" (onAdd)="getLicenses()"></app-new-key>
 
         <ngx-spinner
