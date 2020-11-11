@@ -12,6 +12,10 @@ router.post('/', addDeviceValidators, hasError, async (req, res) => {
     const { id, key, device } = req.body
     const license = await License.findOne({ key, _id: id })
 
+    if (!license) {
+      return res.status(400).json({ message: 'Некорректные данные' })
+    }
+
     if (license.devices.includes(device)) {
       return res.status(200).json({ message: 'Добавлено' })
     }
