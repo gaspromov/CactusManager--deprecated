@@ -9,8 +9,8 @@ const {
 
 router.post('/', addDeviceValidators, hasError, async (req, res) => {
   try {
-    const { id, key, device } = req.body
-    const license = await License.findOne({ key, _id: id })
+    const { key, device } = req.body
+    const license = await License.findOne({ key })
 
     if (!license) {
       return res.status(400).json({ message: 'Некорректные данные' })
