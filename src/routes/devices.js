@@ -9,8 +9,8 @@ const {
 
 router.post('/', addDeviceValidators, hasError, async (req, res) => {
   try {
-    const { key, device } = req.body
-    const license = await License.findOne({ key })
+    const { id, key, device } = req.body
+    const license = await License.findOne({ key, _id: id })
 
     if (license.devices.includes(device)) {
       return res.status(200).json({ message: 'Добавлено' })
