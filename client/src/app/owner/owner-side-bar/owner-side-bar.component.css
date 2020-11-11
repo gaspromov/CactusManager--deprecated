@@ -16,7 +16,7 @@ button{
 }
 
 .standart-btn{
-    padding: 5px 15px;
+    padding: 15px 15px;
     grid-template-columns: auto 1fr;
     justify-items: start;
     column-gap: 10px;

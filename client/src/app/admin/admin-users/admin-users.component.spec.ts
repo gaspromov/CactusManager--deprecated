@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminUsersComponent } from './admin-users.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('AdminUsersComponent', () => {
   let component: AdminUsersComponent;

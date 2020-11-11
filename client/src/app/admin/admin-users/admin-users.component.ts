@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -54,9 +53,12 @@ export class AdminUsersComponent implements OnInit {
         this.spinner.hide();
       })
       .catch( e => {
-        if (e.status == 401)
+        this.spinner.hide();
+        if (e.status == 401){
           this.auth.adminLogout();
-        console.log(e)})
+        }
+        console.log(e)
+      })
   }
 
   async onDeleteUser(id){

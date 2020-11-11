@@ -12,7 +12,7 @@ export class PageHeaderComponent implements OnInit {
   userName: string = '';
 
   ngOnInit(): void {
-    this.userName = this.isAdmin ? 'Admin' : localStorage.getItem('userName');
+    this.userName = this.isAdmin ? 'Admin' : localStorage.getItem('ownerName');
   }
 
 }
