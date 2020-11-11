@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
     if (!user) {
       return res.status(401).json({ message: 'Нет авторизации' })
     }
-    req.user = decoded
+    req.user = user
     return next()
   } catch (e) {
     return res.status(401).json({ message: 'Нет авторизации' })
