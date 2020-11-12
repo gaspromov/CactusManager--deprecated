@@ -14,3 +14,17 @@ form{
 form button{
     margin-top: 20px;
 }
+
+.input{
+    position: relative;
+}
+
+.input .error{
+    position: absolute;
+    bottom: 0px;
+    left: 15px;
+    transform: translate(0px, 100%);
+    color: #F65151;
+    font-size: 14px;
+    line-height: 22px;
+}

@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 })
 export class AdminAuthComponent implements OnInit {
   loginForm: FormGroup;
+  error = '';
 
   constructor(
     private auth: AuthService,
@@ -26,6 +27,7 @@ export class AdminAuthComponent implements OnInit {
   }
 
   async login(){
+    this.error = '';
     if (this.loginForm.valid){
       this.spinner.show();
       await this.auth.adminLogin(this.loginForm.value)
@@ -33,7 +35,7 @@ export class AdminAuthComponent implements OnInit {
           this.auth.setAdminToken(w.accessToken);
           this.router.navigate(['/admin']);
         })
-        .catch(e => {console.log(e); this.spinner.hide();})
+        .catch(e => {this.error = e.error.message; this.spinner.hide();})
     }
   }
 

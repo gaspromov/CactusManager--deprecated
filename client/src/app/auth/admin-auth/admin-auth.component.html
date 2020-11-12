@@ -2,7 +2,10 @@
     <form [formGroup]="loginForm" (ngSubmit)="login()">
         <input formControlName="login" type="text" class="standart-input">
         <input formControlName="password" type="password" class="standart-input">
-        <button class="standart-btn linear-btn">Auth</button>
+        <div class="input">
+            <button class="standart-btn linear-btn">Auth</button>
+            <span class="error" *ngIf="error">{{ error }}</span>
+        </div>
     </form>
 </div>
 <ngx-spinner

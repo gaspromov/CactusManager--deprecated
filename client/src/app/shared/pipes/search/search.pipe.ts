@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchPipe implements PipeTransform {
 
   transform(arr: any = [], searchKeys: any = [], searchParam: string = ''): unknown {
-    console.log(arr, searchKeys, searchParam)
 
     if (arr[0] && searchParam !== '' && searchKeys[0]){
 

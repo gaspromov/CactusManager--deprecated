@@ -70,7 +70,6 @@ export class KeysComponent implements OnInit {
           this.auth.ownerLogout();
         }
         else{
-          console.log(e)
           this.spinner.show()
         }
       })
@@ -85,7 +84,6 @@ export class KeysComponent implements OnInit {
           this.spinner.hide()
           this.auth.adminLogout();
         }
-        console.log(e) 
       })
   }
 
@@ -99,7 +97,6 @@ export class KeysComponent implements OnInit {
         if (e.status == 401){
           this.auth.adminLogout();
         }
-        console.log(e)
       } )
   }
 
@@ -132,9 +129,5 @@ export class KeysComponent implements OnInit {
 
   onFilterChange(){
     this.filterChange = !this.filterChange;
-  }
-
-  search(){
-    console.log('start')
   }
 }
