@@ -28,7 +28,6 @@ export class OwnerComponent implements OnInit {
           localStorage.setItem('ownerEmail', w.email);
         })
         .catch( e => {
-          console.log(e);
           if ( e.status == 401 ){
             this.auth.ownerLogout();
 

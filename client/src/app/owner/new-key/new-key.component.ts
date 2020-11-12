@@ -59,7 +59,6 @@ export class NewKeyComponent implements OnInit {
         .catch( e => {
           if (e.status == 401)
             this.auth.ownerLogout()
-          console.log(e);
           this.errorMessage = e.error.message;
         })
     }

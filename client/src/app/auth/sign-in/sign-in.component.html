@@ -14,7 +14,7 @@
                         {{ errorMessage }}
                     </span>
 
-                    <input type="email" name="email" id="email" class="standart-input email" placeholder="E-mail" formControlName="email" [ngClass]="{'error': errorMessage}">
+                    <input type="email" name="email" id="email" class="standart-input email" placeholder="E-mail" autocomplete="email" formControlName="email" [ngClass]="{'error': errorMessage}">
 
                     <div class="password-inp">
                         <input type="password" name="password" id="password" placeholder="Password" class="standart-input" formControlName="password" [ngClass]="{'error': errorMessage}">
